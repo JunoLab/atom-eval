@@ -1,0 +1,19 @@
+{
+  "name": "atom-eval",
+  "main": "./lib/atom-eval",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "atom-eval:evaluate"
+  },
+  "repository": "https://github.com/atom/atom-eval",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "coffee-script": "^1.8.0"
+  }
+}
