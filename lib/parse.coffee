@@ -41,7 +41,7 @@ module.exports =
     ls.slice(start, end).join('\n')
 
   parsekey: (code) ->
-    match = code.match /\s*(\w*):\s*([^]*)/
+    match = code.match /^\s*(\w*):\s*([^]*)/
     return {code: code} unless match?
     [_, key, code] = match
     return {key: key, code: code}
