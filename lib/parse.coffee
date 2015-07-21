@@ -11,6 +11,7 @@ module.exports =
   patchHeader: (file, code) ->
     dir = path.dirname file
     code.replace(/'\.\//g, "'#{dir}/")
+        .replace(/'\.\.\//g, "'#{dir}/../")
 
   insertHeader: (header, code) -> "#{header}\n(#{code}\n)"
 
