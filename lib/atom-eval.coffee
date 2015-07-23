@@ -33,7 +33,9 @@ module.exports = AtomEval =
     for sel in editor.getSelections()
 
       if sel.isEmpty()
-        code = parse.getBlock editor.getText(), sel.cursor.getBufferPosition().row
+        {code, start, end} = parse.getBlock editor.getText(),
+                                            sel.cursor.getBufferPosition().row
+        @ink?.highlight editor, start, end
       else
         code = sel.getText()
       first = parse.firstLine(code)
@@ -41,3 +43,6 @@ module.exports = AtomEval =
       code = parse.insertHeader(header, code)
       console.log first + ' ='
       console.log run.eval mod, code, key
+
+  consumeInk: (ink) ->
+    @ink = ink

@@ -39,7 +39,10 @@ module.exports =
       indent = ls[start].match(/^\s*/)[0]
       start = @walkBack ls, row, indent
     end = @walkForward ls, start+1, indent
-    ls.slice(start, end).join('\n')
+
+    code: ls.slice(start, end).join('\n')
+    start: start
+    end: end-1
 
   parsekey: (code) ->
     match = code.match /^\s*(\w*):\s*([^]*)/
