@@ -35,6 +35,7 @@ module.exports = AtomEval =
       if sel.isEmpty()
         {code, start, end} = parse.getBlock editor.getText(),
                                             sel.cursor.getBufferPosition().row
+        continue unless code?
         @ink?.highlight editor, start, end
       else
         code = sel.getText()

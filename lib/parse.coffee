@@ -31,11 +31,12 @@ module.exports =
     ls = code.split('\n')
     indent = ""
     start = @walkBack ls, row, indent
-    if start == -1 then return
+    if start == -1 then return {}
     if ls[start].match /^module\.exports\s*=/
       start++
       while start < ls.length and ls[start].match /^\s*$/
         start++
+      return {} unless ls[start]
       indent = ls[start].match(/^\s*/)[0]
       start = @walkBack ls, row, indent
     end = @walkForward ls, start+1, indent
