@@ -7,5 +7,9 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
-'atom-text-editor[data-grammar="source coffee"]:not([mini])':
+'.platform-darwin atom-text-editor[data-grammar="source coffee"]:not([mini])':
   'cmd-enter': 'atom-eval:evaluate'
+
+'.platform-linux atom-text-editor[data-grammar="source coffee"]:not([mini]),
+ .platform-win32 atom-text-editor[data-grammar="source coffee"]:not([mini])':
+  'ctrl-enter': 'atom-eval:evaluate'
