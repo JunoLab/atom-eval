@@ -33,15 +33,16 @@ module.exports = AtomEval =
     for sel in editor.getSelections()
 
       if sel.isEmpty()
-        {code, start, end} = parse.getBlock editor.getText(),
-                                            sel.cursor.getBufferPosition().row
+        {code, start, end, isClass} = parse.getBlock editor.getText(),
+                                                     sel.cursor.getBufferPosition().row
         continue unless code?
         @ink?.highlight editor, start, end
       else
         code = sel.getText()
       first = parse.firstLine(code)
-      {code, key} = parse.parsekey code
+      {code, key, isStatic} = parse.parsekey code
       code = parse.insertHeader(header, code)
+      if isClass and not isStatic then mod += '.prototype'
       console.log first + ' ='
       console.log run.eval mod, code, key
 

@@ -32,7 +32,8 @@ module.exports =
     indent = ""
     start = @walkBack ls, row, indent
     if start == -1 then return {}
-    if ls[start].match /^module\.exports\s*=/
+    if ls[start].match /^module\.exports\s*=|^class/
+      if ls[start].startsWith 'class' then isClass = true
       start++
       while start < ls.length and ls[start].match /^\s*$/
         start++
@@ -44,12 +45,14 @@ module.exports =
     code: ls.slice(start, end).join('\n')
     start: start
     end: end-1
+    isClass: isClass
 
   parsekey: (code) ->
-    match = code.match /^\s*(\w*):\s*([^]*)/
+    match = code.match /^\s*@?(\w*):\s*([^]*)/
+    isStatic = code.match(/^\s*@/)?
     return {code: code} unless match?
     [_, key, code] = match
-    return {key: key, code: code}
+    return {key, code, isStatic}
 
   firstLine: (code) ->
     code = code.split('\n')
