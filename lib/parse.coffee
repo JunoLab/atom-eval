@@ -1,6 +1,9 @@
 path = require 'path'
 
 module.exports =
+  escape: (path) ->
+    path.replace /\\/g, "\\\\"
+
   getHeader: (code) ->
     header = ''
     for l in code.split '\n'
@@ -10,8 +13,8 @@ module.exports =
 
   patchHeader: (file, code) ->
     dir = path.dirname file
-    code.replace(/'\.\//g, "'#{dir}/")
-        .replace(/'\.\.\//g, "'#{dir}/../")
+    code.replace(/'\.\//g, "'#{@escape(dir)}/")
+        .replace(/'\.\.\//g, "'#{@escape(dir)}/../")
 
   insertHeader: (header, code) -> "#{header}\n(#{code}\n)"
 

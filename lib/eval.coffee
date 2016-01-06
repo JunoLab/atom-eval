@@ -1,13 +1,12 @@
 vm = require 'vm'
 coffee = require 'coffee-script'
+parse = require './parse'
 
 module.exports =
-  escape: (path) ->
-    path.replace /\\/g, "\\\\"
 
   module: (path) ->
     return 'window' unless path?
-    return "require('#{@escape(path)}')"
+    return "require('#{parse.escape(path)}')"
 
   indent: (code) ->
     code.split('\n').map((n) -> '  ' + n).join('\n')
