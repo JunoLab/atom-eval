@@ -43,7 +43,7 @@ module.exports = AtomEval =
       first = parse.firstLine(code)
       {code, key, isStatic} = parse.parsekey code
       code = parse.insertHeader(header, code)
-      code = "__dirname = '#{path.dirname(editor.getPath())}'\n" + code
+      code = "__dirname = '#{parse.escape(path.dirname(editor.getPath()))}'\n" + code
       if isClass and not isStatic then mod += '.prototype'
       console.log first + ' ='
       console.log run.eval mod, code, key
