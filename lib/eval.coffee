@@ -26,7 +26,7 @@ module.exports =
     "#{code}.call(#{mod})"
 
   eval: (mod, code, key) ->
-    result = vm.runInThisContext (@wrapModule mod, @coffee(code))
+    result = vm.runInThisContext @wrapModule mod, @coffee(code)
     if key?
       mod = vm.runInThisContext(mod)
       mod[key] = result
