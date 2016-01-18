@@ -16,7 +16,7 @@ module.exports =
     code.replace(/'\.\//g, "'#{@escape(dir)}/")
         .replace(/'\.\.\//g, "'#{@escape(dir)}/../")
 
-  insertHeader: (header, code) -> "#{header}\n(#{code}\n)"
+  insertHeader: (header, code) -> "#{header}\n(\n#{code}\n)"
 
   walkBack: (ls, i, indent) ->
     r = new RegExp "^" + indent + "[^\\s]"
@@ -51,7 +51,7 @@ module.exports =
     isClass: isClass
 
   parsekey: (code) ->
-    match = code.match /^\s*@?(\w*):\s*([^]*)/
+    match = code.match /^\s*@?(\w*):\s*?\n?([^]*)/
     isStatic = code.match(/^\s*@/)?
     return {code: code} unless match?
     [_, key, code] = match
