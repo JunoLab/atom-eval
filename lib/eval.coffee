@@ -1,12 +1,19 @@
 vm = require 'vm'
+path = require 'path'
 coffee = require 'coffee-script'
 parse = require './parse'
 
 module.exports =
 
+  getAtomPath: (p) ->
+    if m = p.match /atom[\\/]src[\\/](.*)\.coffee/
+      [_, name]= m
+      p = path.join process.resourcesPath, 'app.asar', 'src', name + '.js'
+    p
+
   module: (path) ->
     return 'window' unless path?
-    return "require('#{parse.escape(path)}')"
+    return "require('#{parse.escape @getAtomPath path}')"
 
   indent: (code) ->
     code.split('\n').map((n) -> '  ' + n).join('\n')
